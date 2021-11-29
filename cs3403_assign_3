@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Form Validation in js</title>
+    
+
+</head>
+
+<style>
+    body {
+    padding: 10px 50px;
+    background-color: aqua;
+}
+
+.formdesign {
+    font-size: 20px;
+    color: blueviolet;
+}
+
+.formdesign input {
+    width: 50%;
+    padding: 12px 20px;
+    border: 5px solid rgb(250, 208, 22);
+    margin: 14px;
+    border-radius: 20px;
+    font-size: 15px;
+    
+}
+
+.formerror {
+    color: coral;
+}
+
+.but {
+    border-radius: 9px;
+    width: 250px;
+    height: 50px;
+    font-size: 25px;
+    margin: 22px 20px;
+}
+</style>
+
+<body>
+    <h1>Display:</h1>
+    <form aciton ="kp.html" name="myForm" onsubmit="return validateForm()" method="post">
+        <div class="formdesign" id="name">
+           First Name: <input type="text" name="fname" required><b><span class="formerror"> </span></b>
+        </div>
+
+        <div class="formdesign" id="address">
+            Address: <input type="text" name="faddress" required><b><span class="formerror"> </span></b>
+         </div>
+
+         <div class="formdesign" id="zipcode">
+            Zipcode: <input type="number" name="fzipcode" required><b><span class="formerror"> </span></b>
+         </div>
+
+         <div class="formdesign" id="state">
+            <label for="state">State: </label>
+            <select name="mystate" id="state">
+            <option value="">Bihar</option>
+            <option value="">Rajasthan</option>
+            <option value="">U.P</option>
+            </select>
+         </div>
+
+         <div class="formdesign" id="username">
+            Username: <input type="text" name="fusername" required><b><span class="formerror"> </span></b>
+         </div>
+
+
+         <div class="formdesign" id="email">
+            Email: <input type="email" name="femail" required><b><span class="formerror"> </span></b>
+        </div>
+        
+
+        
+
+       <input class="but" type="submit" value="Check Form">
+
+    </form>
+</body>
+<script>
+    function clearErrors(){
+
+errors = document.getElementsByClassName('formerror');
+for(let item of errors)
+{
+    item.innerHTML = "";
+}
+
+
+}
+function seterror(id, error){
+//sets error inside tag of id 
+element = document.getElementById(id);
+element.getElementsByClassName('formerror')[0].innerHTML = error;
+
+}
+
+function validateForm(){
+var returnval = true;
+clearErrors();
+
+//perform validation and if validation fails, set the value of returnval to false
+var name = document.forms['myForm']["fname"].value;
+if (name.length<5){
+    seterror("name", "*Name must Contain more than 5 Characters!");
+    returnval = false;
+}
+
+if (name.length == 0){
+    seterror("name", "*Length of name cannot be zero!");
+    returnval = false;
+}
+var address = document.forms['myForm']["faddress"].value;
+if (address.length<10){
+    seterror("address", "*Address must Contain more than 10 Characters!");
+    returnval = false;
+}
+
+var zip = document.forms['myForm']["fzipcode"].value;
+if (zip.length<5){
+    seterror("zipcode", "*Zipcode must be more than 5 digits!");
+    returnval = false;
+}
+var email = document.forms['myForm']["femail"].value;
+if (email.length>15){
+    seterror("email", "*Email length is too long");
+    returnval = false;
+}
+
+var user = document.forms['myForm']["fusername"].value;
+if (user.length<6 || user.length>8){
+    seterror("username", "*Username must Contain 6-8 characters!");
+    returnval = false;
+}
+
+
+return returnval;
+
+}
+
+</script>
+
+</html>
